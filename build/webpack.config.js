@@ -33,7 +33,7 @@ module.exports = {
     loaders: [
 
       {
-        test: /\.js$/,
+        test: /\.js|jsx$/,
         loader: 'babel',
         exclude: /node_modules/,
       },
@@ -64,7 +64,7 @@ module.exports = {
   resolve: {
 
     // require时省略的扩展名，如：require('module') 不需要module.js
-    extensions: ['', '.js'],
+    extensions: ['', '.js', '.jsx'],
 
     // 别名，可以直接使用别名来代表设定的路径以及其他
     alias: {
