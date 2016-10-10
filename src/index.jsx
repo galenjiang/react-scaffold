@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Child from './components/Child';
+import ReactDom from 'react-dom';
+import AddTodo from './components/AddTodo';
+import TodoList from './components/TodoList';
+import Footer from './components/Footer';
 
-class App extends Component {
-
-  state = {
-    parentContent: 'hello',
-    childContent: 'world',
-  };
-
+export default class App extends Component {
   render() {
     return (
       <div>
-        {this.state.parentContent}
-        <Child {...this.state}>
-          <h3>你好</h3>
-        </Child>
+        <AddTodo onAddClick={text => console.log('add todo', text)} />
+        <TodoList todos={[{ text: 'Use Redux', completed: true }, { text: 'Learn to connect it to React', completed: false }]} onTodoClick={todo => console.log('todo clicked', todo)} />
+        <Footer filter="SHOW_ALL" onFilterChange={filter => console.log('filter change', filter)} />
       </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.querySelector('#app'));
+ReactDom.render(<App />, document.querySelector('#app'));
