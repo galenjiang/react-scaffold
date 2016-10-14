@@ -5,7 +5,7 @@ export default class Todo extends Component {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
     text: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired
+    completed: PropTypes.bool.isRequired,
   };
   render() {
     return (

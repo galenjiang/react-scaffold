@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
-import ReactDom from 'react-dom';
-import AddTodo from './components/AddTodo';
-import TodoList from './components/TodoList';
-import Footer from './components/Footer';
+import React from 'react';
+import { render } from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import App from './containers/App';
+import todoApp from './reducers';
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>
-        <AddTodo onAddClick={text => console.log('add todo', text)} />
-        <TodoList todos={[{ text: 'Use Redux', completed: true }, { text: 'Learn to connect it to React', completed: false }]} onTodoClick={todo => console.log('todo clicked', todo)} />
-        <Footer filter="SHOW_ALL" onFilterChange={filter => console.log('filter change', filter)} />
-      </div>
-    );
-  }
-}
+let store = createStore(todoApp);
 
-ReactDom.render(<App />, document.querySelector('#app'));
+render(
+  <Provider store={store} >
+    <App />
+  </Provider>,
+  document.querySelector('#app')
+);
