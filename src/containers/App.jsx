@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { VisibilityFilters } from '../constants';
+import '../assets/reset.css';
 
 import { addTodo, toggleTodo, setVisibilityFilter } from '../actions';
 import AddTodo from '../components/AddTodo';
@@ -9,43 +10,34 @@ import Footer from '../components/Footer';
 
 const { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } = VisibilityFilters;
 
-class App extends Component {
-  constructor() {
-    super();
-    console.log(1)
-  }
-  static propTypes = {
-    visibilityFilter: PropTypes.oneOf([
-      SHOW_ALL,
-      SHOW_COMPLETED,
-      SHOW_ACTIVE,
-    ]),
-    visibleTodos: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      completed: PropTypes.bool.isRequired,
-    })),
-  }
+function App(props) {
+  const {
+    dispatch,
+    // visibleTodos,
+    // visibilityFilter,
+  } = props;
 
-  componentWillMount() {
-    console.log(2)
-  }
-
-  render() {
-    const {
-      dispatch,
-      // visibleTodos,
-      // visibilityFilter,
-    } = this.props;
-    console.log(this.props);
-    return (
-      <div>
-        <AddTodo onAddClick={text => dispatch(addTodo(text))} />
-        <TodoList todos={this.props.visibleTodos} onTodoClick={index => dispatch(toggleTodo(index))} />
-        <Footer filter={this.props.visibilityFilter} onFilterChange={filter => dispatch(setVisibilityFilter(filter))} />
-      </div>
-    );
-  }
+  return (
+    <div className="test">
+      <AddTodo onAddClick={text => dispatch(addTodo(text))} />
+      <TodoList todos={props.visibleTodos} onTodoClick={index => dispatch(toggleTodo(index))} />
+      <Footer filter={props.visibilityFilter} onFilterChange={filter => dispatch(setVisibilityFilter(filter))} />
+    </div>
+  );
 }
+
+App.propTypes = {
+  dispatch: PropTypes.func,
+  visibilityFilter: PropTypes.oneOf([
+    SHOW_ALL,
+    SHOW_COMPLETED,
+    SHOW_ACTIVE,
+  ]),
+  visibleTodos: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+  })),
+};
 
 function selectTodos(todos, filter) {
   switch (filter) {

@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const debug = process.env.NODE_ENV.trim() === 'debug';
 
@@ -38,10 +39,10 @@ module.exports = {
         exclude: /node_modules/,
       },
 
-      // {
-      //     test: /\.css$/,
-      //     loader: 'style!css!autoprefixer?{browsers:["last 2 versions", "Android >= 4.0"]}'
-      // },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+      },
 
       // {
       //     test: /\.scss$/,
@@ -75,7 +76,6 @@ module.exports = {
   plugins: [
 
     // 提供全局的变量，在模块中使用无需用require引入
-    
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html',
@@ -107,6 +107,8 @@ module.exports = {
     //   context: __dirname,
     //   mainfest: console.log(__dirname) || require('../dist/manifest.json'),
     // }),
+
+    new ExtractTextPlugin('style.css'),
   ],
 
 };
