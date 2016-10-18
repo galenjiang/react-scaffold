@@ -1,3 +1,6 @@
-.test{
-  composes: test from './reset.css'; 
+body{
+  background: #ccc;
+}
+.body{
+  background-color: #ccc;
 }

@@ -8,25 +8,30 @@ import webpackConfig from './webpack.config';
 
 const config = merge(webpackConfig, {
   entry: {
-    index: ['webpack-dev-server/client?http://0.0.0.0:9090/', 'webpack/hot/dev-server']
+    index: [
+      'webpack-dev-server/client?http://0.0.0.0:9090/',
+      'webpack/hot/only-dev-server',
+    ],
   },
 
-  devtool: 'eval-source-map',
-  
+  devtool: 'source-map',
+
   plugins: [
 
     new webpack.ProvidePlugin({
       _: 'lodash',
-      react: 'react'
+      react: 'react',
     }),
-    
-    new webpack.HotModuleReplacementPlugin(), new WebpackBrowserPlugin({
-    browser: 'chrome',
-    port: 9090,
-    url: 'http://localhost'
-})
-  ]
-})
+
+    new webpack.HotModuleReplacementPlugin(),
+
+    new WebpackBrowserPlugin({
+      browser: 'chrome',
+      port: 9090,
+      url: 'http://localhost',
+    }),
+  ],
+});
 
 new WebpackDevServer(webpack(config), {
   contentBase: 'dev',

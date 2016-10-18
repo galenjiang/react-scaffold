@@ -35,14 +35,19 @@ module.exports = {
 
       {
         test: /\.js|jsx$/,
-        loader: 'babel',
+        loaders: ['react-hot', 'babel'],
         exclude: /node_modules/,
       },
 
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap'),
       },
+
+      // {
+      //   test: /\.css$/,
+      //   loaders: ['style', 'css'],
+      // },
 
       // {
       //     test: /\.scss$/,

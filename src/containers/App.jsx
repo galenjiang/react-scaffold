@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { VisibilityFilters } from '../constants';
-import '../assets/reset.css';
+import '../assets/reset.scss';
 
 import { addTodo, toggleTodo, setVisibilityFilter } from '../actions';
 import AddTodo from '../components/AddTodo';
@@ -16,7 +16,7 @@ function App(props) {
     // visibleTodos,
     // visibilityFilter,
   } = props;
-
+  console.log(222)
   return (
     <div className="test">
       <AddTodo onAddClick={text => dispatch(addTodo(text))} />
