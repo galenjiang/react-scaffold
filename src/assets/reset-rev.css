@@ -1,0 +1,3 @@
+.test{
+  composes: test from './reset.css'; 
+}
